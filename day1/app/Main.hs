@@ -1,7 +1,7 @@
 module Main where
 
-import Lib
 import Control.Arrow
+import Lib
 
 type Input = [Int]
 
