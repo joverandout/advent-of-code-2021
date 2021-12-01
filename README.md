@@ -2,7 +2,7 @@
 
 My solutions to 2020 Advent of Code. For Haskell files I have not uploaded all the stack gubbins to the repository instead just the `Main.hs` file. 
 
-##Run Instructions
+## Run Instructions
 
 To create the stack file install `stack` using
 
