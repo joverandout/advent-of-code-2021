@@ -6,7 +6,7 @@ import Control.Arrow
 data Direction = Up | Down | Forward deriving Show
 data Instruction = Instruction Direction Int deriving Show
 type Coordinates1 = (Int, Int)
-type Coordinates2 = (Int, Int ,Int)
+type Coordinates2 = (Int, Int, Int)
 
 main :: IO ()
 main = do readFile "input.txt" >>= print . (part1 &&& part2) . prepare
@@ -25,7 +25,7 @@ updateCoords1 (x,y) (Instruction m n) = case m of
 
 updateCoords2 :: Coordinates2 -> Instruction -> Coordinates2
 updateCoords2 (x, y, z) (Instruction m n) = case m of
-    Forward -> (x+n, y+(z * n), z)
+    Forward -> (x+n, y+(z*n), z)
     Up -> (x, y, z-n)
     Down -> (x, y, z+n)
 
