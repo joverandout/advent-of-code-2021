@@ -23,6 +23,7 @@ updateCoords1 (x,y) (Instruction m n) = case m of
     Up -> (x, y-n)
     Down -> (x, y+n)
 
+
 updateCoords2 :: Coordinates2 -> Instruction -> Coordinates2
 updateCoords2 (x, y, z) (Instruction m n) = case m of
     Forward -> (x+n, y+(z*n), z)
