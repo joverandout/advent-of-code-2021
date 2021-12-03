@@ -10,7 +10,7 @@ data Bit = Zero | One deriving (Eq, Ord, Show, Enum)
 type Input = [[Bit]]
 
 main :: IO ()
-main = do readFile "input.txt" >>= print . part1 . getFrequencies . transpose . prepare
+main = do readFile "input.txt" >>= print . part1 . getFrequenciesx . prepare
 
 part1 :: [Frequency] -> Int
 part1 xs = fromDigits 2 (gamma xs) * fromDigits 2 (eps xs)
@@ -22,6 +22,9 @@ gamma (x:xs) = gamma [x] ++ gamma xs
 eps :: [Frequency] -> [Int]
 eps [Frequency ones zeroes] = [fromEnum (ones < zeroes)]
 eps (x:xs) = eps [x] ++ eps xs
+
+getFrequenciesx :: [[Bit]] -> [Frequency]
+getFrequenciesx xs = getFrequencies (transpose xs)
 
 getFrequencies :: [[Bit]] -> [Frequency]
 getFrequencies [x] = [getFreq x (Frequency 0 0)]
