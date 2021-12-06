@@ -7,7 +7,7 @@ import Control.Arrow hiding (second)
 type Board = [[(Bool, Int)]]
 
 main :: IO ()
-main =  readFile "input.txt" >>= print . (part1 &&& part2) . toInput . lines
+main =  readFile "input.txt" >>= print . (part1 &&& part2) . prepare . lines
 
 part1 :: ([Int], [Board]) -> Int
 part1 (i, bs) = uncurry (*) . second computeScore $ evalState (solvePart1 i) bs
@@ -22,13 +22,12 @@ part2 (i, bs) = uncurry (*) . second computeScore $ evalState (solvePart2 i) bs
       if length b /= 1 then modify (filter (not . hasWon) . map (updateBoard x)) >> solvePart2 xs
                        else solvePart1 (x:xs)
 
-toInput :: [String] -> ([Int], [Board])
-toInput []     = ([], [])
-toInput (l:ls) = (toInts l, toBoards ls)
+prepare :: [String] -> ([Int], [Board])
+prepare []     = ([], [])
+prepare (l:ls) = (toInts l, toBoards ls)
  where
   toInts :: String -> [Int] 
   toInts =  map read . filter (/= ",") . groupBy (\x y -> isNumber x && isNumber y) 
-  
   toBoards :: [String] -> [Board]
   toBoards [] = []
   toBoards xs = (map (zip (repeat False) . map read . words) . drop 1 . take 6) xs : toBoards (drop 6 xs)
