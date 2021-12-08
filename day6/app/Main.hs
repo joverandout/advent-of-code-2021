@@ -20,9 +20,11 @@ updateFishes :: [Fish] -> [Fish]
 updateFishes [x] = updateFish x
 updateFishes (x:xs) = updateFish x ++ updateFishes xs
 
-eightyUpdates :: Int -> [Fish] -> [Fish]
-eightyUpdates 80 fish = fish
-eightyUpdates x fish = eightyUpdates (x+1) (updateFishes fish)
+ageSchoolNTimes :: Int -> [Fish] -> [Fish]
+ageSchoolNTimes n school = iterate updateFishes school !! n
 
 part1 :: Input -> Int
-part1 fishes = length (eightyUpdates 0 fishes)
+part1 fishes = length (ageSchoolNTimes 80 fishes)
+
+part2 :: Input -> Int
+part2 fishes = length (ageSchoolNTimes 256 fishes)
