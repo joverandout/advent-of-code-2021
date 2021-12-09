@@ -27,5 +27,7 @@ If a specific function wants to be tested out please use
 stack repl
 ```
 
+Sometimes the solutions are pretty shoddy - on day 5 I had a Pasanda cooking away and so didn't have time to implement the most efficient solution. The curry was delish though!
+
 ## Disclosure
 The code in this git repository is the copyright of Joe Moore and distribution or use is not allowed without explicit permission and without giving full credit
