@@ -12,6 +12,9 @@ type LineCoverage = Map.Map Point Int
 
 type Input = [Line]
 
+prepare :: String -> Input
+prepare = map parseLine . lines
+
 vertical :: Line -> Bool
 vertical ((x1, y1), (x2, y2)) = x1 == x2
 
@@ -20,9 +23,6 @@ horizontal ((x1, y1), (x2, y2)) =  y1 == y2
 
 diagonal :: Line -> Bool
 diagonal ((x1, y1), (x2, y2)) = abs (x1-x2) == abs (y1-y2)
-
-prepare :: String -> Input
-prepare = map parseLine . lines
 
 parseLine :: String -> Line
 parseLine = firstVal . map parsePoint . splitOn " -> "
