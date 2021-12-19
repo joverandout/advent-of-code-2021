@@ -21,11 +21,6 @@ mismatch = flip lookup
   , ('>', Mismatch '<' 25137)
   ]
 
-part1 :: Input -> Int
-part1 = sum . mapMaybe (calcScore . scoreC)
-  where calcScore (Corrupted n) = Just n
-        calcScore _ = Nothing
-
 part2 :: Input -> Int
 part2 = middle . sort . mapMaybe (calcScore . scoreC)
   where calcScore (Incomplete xs) = Just $ foldl' accum 0 xs
@@ -39,6 +34,10 @@ part2 = middle . sort . mapMaybe (calcScore . scoreC)
         middle [] = error "even length"
         middle xs = middle (tail . init $ xs)
 
+part1 :: Input -> Int
+part1 = sum . mapMaybe (calcScore . scoreC)
+  where calcScore (Corrupted n) = Just n
+        calcScore _ = Nothing
 
 prepare :: String -> Input
 prepare = lines
