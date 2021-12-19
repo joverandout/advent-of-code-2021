@@ -11,7 +11,7 @@ type Input = [String]
 
 
 main :: IO ()
-main = readFile "input.txt" >>= print . part1 . prepare
+main = readFile "input.txt" >>= print . (part1 &&& part2) . prepare
 
 mismatch :: Char -> Maybe Mismatch
 mismatch = flip lookup
@@ -21,17 +21,30 @@ mismatch = flip lookup
   , ('>', Mismatch '<' 25137)
   ]
 
-
 part1 :: Input -> Int
-part1 = sum . mapMaybe (getScore . score)
-  where getScore (Corrupted n) = Just n
-        getScore _ = Nothing
+part1 = sum . mapMaybe (calcScore . scoreC)
+  where calcScore (Corrupted n) = Just n
+        calcScore _ = Nothing
+
+part2 :: Input -> Int
+part2 = middle . sort . mapMaybe (calcScore . scoreC)
+  where calcScore (Incomplete xs) = Just $ foldl' accum 0 xs
+        calcScore _ = Nothing
+        accum acc c = 5 * acc + score c
+        score '(' = 1
+        score '[' = 2
+        score '{' = 3
+        score '<' = 4
+        middle [x] = x
+        middle [] = error "even length"
+        middle xs = middle (tail . init $ xs)
+
 
 prepare :: String -> Input
 prepare = lines
 
-score :: [Char] -> ParseResult
-score = go []
+scoreC :: [Char] -> ParseResult
+scoreC = go []
   where go [] [] = Correct
         go s [] = Incomplete s
         go stack (i:input) = case mismatch i of
