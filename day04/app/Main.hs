@@ -22,6 +22,9 @@ part2 (i, bs) = uncurry (*) . second computeScore $ evalState (solvePart2 i) bs
       if length b /= 1 then modify (filter (not . hasWon) . map (updateBoard x)) >> solvePart2 xs
                        else solvePart1 (x:xs)
 
+hasWon :: Board -> Bool
+hasWon b = let markings = map (map fst) b in any and markings || any and (transpose markings)
+
 prepare :: [String] -> ([Int], [Board])
 prepare []     = ([], [])
 prepare (l:ls) = (toInts l, toBoards ls)
@@ -39,9 +42,6 @@ solvePart1 (x:xs) = do
     b <- gets (filter hasWon) 
     if null b then solvePart1 xs
               else return (x, head b)
-
-hasWon :: Board -> Bool
-hasWon b = let markings = map (map fst) b in any and markings || any and (transpose markings)
 
 updateBoard :: Int -> Board -> Board
 updateBoard x = map (map (\(b, y) -> if y == x then (True, y) else (b, y)))
