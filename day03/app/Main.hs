@@ -15,6 +15,10 @@ main = do readFile "input.txt" >>= print . part1 . getFrequenciesx . prepare
 part1 :: [Frequency] -> Int
 part1 xs = fromDigits 2 (gamma xs) * fromDigits 2 (eps xs)
 
+getFrequencies :: [[Bit]] -> [Frequency]
+getFrequencies [x] = [getFreq x (Frequency 0 0)]
+getFrequencies (x:xs) = getFrequencies [x] ++ getFrequencies xs
+
 gamma :: [Frequency] -> [Int]
 gamma [Frequency ones zeroes] = [fromEnum (ones > zeroes)]
 gamma (x:xs) = gamma [x] ++ gamma xs
@@ -25,10 +29,6 @@ eps (x:xs) = eps [x] ++ eps xs
 
 getFrequenciesx :: [[Bit]] -> [Frequency]
 getFrequenciesx xs = getFrequencies (transpose xs)
-
-getFrequencies :: [[Bit]] -> [Frequency]
-getFrequencies [x] = [getFreq x (Frequency 0 0)]
-getFrequencies (x:xs) = getFrequencies [x] ++ getFrequencies xs
 
 getFreq :: [Bit] -> Frequency -> Frequency
 getFreq [One] (Frequency ones zeroes) = Frequency (ones+1) zeroes
