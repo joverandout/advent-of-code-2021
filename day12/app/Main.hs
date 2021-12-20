@@ -40,13 +40,13 @@ visitable path node
 hasRepeatingElement :: (Ord a) => [a] -> Bool
 hasRepeatingElement xs = (xs & Set.fromList & Set.toList & length) /= length xs
 
+nodeLarge :: Node -> Bool
+nodeLarge = isUpper . head
+
 isNotInOrOnce :: [Node] -> Node -> Bool
 isNotInOrOnce path node = case node `elemIndex` path of
   Nothing -> True
   Just n -> node `notElem` drop (succ n) path
-
-nodeLarge :: Node -> Bool
-nodeLarge = isUpper . head
 
 part1 :: [Node] -> Graph -> Int
 part1 ("end" : _) _ = 1
