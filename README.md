@@ -4,9 +4,7 @@ My solutions to 2020 Advent of Code. For Haskell files I have not uploaded all t
 
 ## Update
 
-Yes we are lagging behind! My dissertation takes priority and I cannot for the life of me fix this one bug in my back-end interpreter. I'm sure we will finish this someday.
-### *The update's update.
-My dissy is going much better so I am back to not doing it... probably not the best decision but we move
+Yes we are lagging behind! My dissertation takes priority and I cannot for the life of me fix this one bug in my back-end interpreter. I'm sure we will finish this someday, but for now it's been put to the back of my mind.
 
 ## Run Instructions
 
